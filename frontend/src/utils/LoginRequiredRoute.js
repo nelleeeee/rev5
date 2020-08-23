@@ -9,7 +9,7 @@ export default function LoginRequiredRoute({
   const {
     store: { isAuthenticated },
   } = useAppContext();
-
+  //
   if (isAuthenticated) {
   } else {
   }
