@@ -4,6 +4,7 @@ import { SmileOutlined, FrownOutlined } from "@ant-design/icons";
 import { useHistory, useLocation } from "react-router-dom";
 import Axios from "axios";
 import { useAppContext, setToken } from "store";
+import { parseErrorMessages } from "utils/forms";
 
 export default function Login() {
   const { dispatch } = useAppContext();
@@ -47,18 +48,19 @@ export default function Login() {
           });
 
           const { data: fieldsErrorMessages } = error.response;
-          setFieldErrors(
-            Object.ectries(fieldsErrorMessages).reduce(
-              (acc, [fieldName, errors]) => {
-                acc[fieldName] = {
-                  validateStatus: "error",
-                  help: errors.join(" "),
-                };
-                return acc;
-              },
-              {}
-            )
-          );
+          // setFieldErrors(
+          //   Object.ectries(fieldsErrorMessages).reduce(
+          //     (acc, [fieldName, errors]) => {
+          //       acc[fieldName] = {
+          //         validateStatus: "error",
+          //         help: errors.join(" "),
+          //       };
+          //       return acc;
+          //     },
+          //     {}
+          //   )
+          // );
+          setFieldErrors(parseErrorMessages(fieldsErrorMessages));
         }
       }
     }
